@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;   /* 改这里 */
+    min-height: 100vh;         /* 改这里 */
+    padding: 40px 0;           /* 增加上下空间 */
+    color: #333;
+}
+
+.main-container {
+    text-align: center;
+    background: white;
+    padding: 50px;
+    border-radius: 15px;
+    width: 800px;
+    max-width: 90%;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.card {
+    flex: 1;
+    background: #f5f7fa;
+    padding: 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    background: #ffffff;
+}
+
+/* 页面内部卡片模块 */
+.section {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.section h2 {
+    margin-bottom: 15px;
+}
+
+.image-card {
+    background: #f9fafc;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.description-card {
+    background: #f5f7fa;
+    padding: 15px;
+    border-radius: 10px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.comment-card {
+    background: #ffffff;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.comment-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.input-group textarea {
+    height: 100px;
+    resize: none;
+}
+
+.back-btn {
+    background: #e5e7eb;
+    color: #111827;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+}
+
+.vote-bar {
+    width: 100%;
+    background: #e5e7eb;
+    border-radius: 8px;
+    height: 12px;
+    margin-top: 8px;
+}
+
+.vote-fill {
+    height: 12px;
+    background: #3b82f6;
+    border-radius: 8px;
+    transition: width 0.4s ease;
+}
+
+.vote-section {
+    margin-top: 20px;
+    text-align: left;   /* 居左 */
+}
+
+.vote-btn {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    font-size: 18px;        /* 字体稍大 */
+    font-weight: 600;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    transition: all 0.25s ease;
+}
+
+/* 悬停效果 */
+.vote-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
+}
+
+/* 点击效果 */
+.vote-btn:active {
+    transform: scale(0.96);
+}
+
+.vote-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.back-btn:hover {
+    background: #d1d5db;
+}

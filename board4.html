@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>队牌设计4</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<div class="main-container">
+<h1>队牌设计 4</h1>
+
+<div class="section image-card">
+    <img src="design41.jpg" style="width:300px;border-radius:10px;">
+</div>
+
+<div class="section description-card">
+    <strong>设计说明：</strong><br>
+    天津大学国旗护卫队队徽设计说明：本队徽以红色与白色为主色调，象征热血与赤诚。外环镌刻“天津大学国旗护卫队”及成立年份1998与2026，彰显传承与使命；五星与橄榄枝寓意荣耀与和平。中心盾牌承载“北洋1895”，锚定校史根脉；下方旗手与护旗手身姿挺拔，国旗飘扬，生动诠释护卫国旗、忠于祖国的责任担当，整体庄重威严，凝聚护卫队精神内核。
+</div>
+
+<div class="section">
+    <h2>留言区</h2>
+    <div id="comments"></div>
+</div>
+
+<div class="section">
+    <h3>提交修改意见</h3>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="请输入真实姓名">
+        <textarea id="message" placeholder="请输入修改意见"></textarea>
+    </div>
+    <button onclick="submitComment()">提交</button>
+</div>
+
+<div class="section" style="text-align:center;">
+    <button class="back-btn" onclick="goBack1()">← 返回</button>
+</div>
+
+<div id="voteResult"></div>
+<div class="vote-section">
+    <button class="vote-btn" onclick="vote(designName)">
+        投票支持
+    </button>
+</div>
+
+<script>
+window.designName = "board4";
+window.parentPage1 = "board.html";
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

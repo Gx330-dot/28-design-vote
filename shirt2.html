@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>队衫设计2</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<div class="main-container">
+<h1>队衫设计 2</h1>
+
+<div class="section image-card">
+    <img src="design2.jpg" style="width:300px;border-radius:10px;">
+</div>
+
+<div class="section description-card">
+    <strong>设计说明：</strong><br>
+	一、正面设计<br>
+  		左胸校徽：白色天津大学校徽置于黑底之上，既是对“实事求是”校训的铭记，也象征队员们扎根北洋		沃土，以学子之身肩负护旗使命。<br>
+  		左下侧纹样：以白色线条勾勒指挥刀与枪械剪影，搭配红色五角星与星点装饰，既呼应国旗护卫队的仪		仗职责与专业素养，也寓意队伍在五星红旗的照耀下成长，传承爱国初心。<br>
+	二、背面设计
+		1.核心数字“28”：左侧“2”融入天大标志性海棠花线稿，承载着校园春日的诗意与生机，彰显天大		人的人文情怀；<br>右侧“8”嵌入天津大学标志性建筑线稿，诉说百年学府的厚重底蕴，强化“校荣		我荣”的归属感。<br>
+		2.时间文字：“1998 TIAN JIN 2026”以硬朗字体居中排列，清晰标注队伍成立与本次纪念的时间节		点，见证28载风雨兼程。<br>
+		3.领口标识：红色队标寓意国护队员昂扬向上的精神风貌，怀揣理想与担当，守护国旗、逐梦前行。
+	三、整体
+  		黑底搭配白、红双色，庄重沉稳且视觉对比强烈，既符合仪仗队服的肃穆感，又通过细节传递“爱国、		爱校、守纪、担当”的队训精神，让每一位队员身着队服时，都能感受到“护我国旗、扬我国威、爱我		天大”的责任与荣耀。
+</div>
+
+<div class="section">
+    <h2>留言区</h2>
+    <div id="comments"></div>
+</div>
+
+<div class="section">
+    <h3>提交修改意见</h3>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="请输入真实姓名">
+        <textarea id="message" placeholder="请输入修改意见"></textarea>
+    </div>
+    <button onclick="submitComment()">提交</button>
+</div>
+
+<div class="section" style="text-align:center;">
+    <button class="back-btn" onclick="goBack()">← 返回</button>
+</div>
+
+<div id="voteResult"></div>
+<div class="vote-section">
+    <button class="vote-btn" onclick="vote(designName)">
+        投票支持
+    </button>
+</div>
+
+<script>
+window.designName = "shirt2";
+window.parentPage = "shirt.html";
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>队牌设计3</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<div class="main-container">
+<h1>队牌设计 3</h1>
+
+<div class="section image-card">
+    <img src="design31.jpg" style="width:300px;border-radius:10px;">
+</div>
+
+<div class="section description-card">
+    <strong>设计说明：</strong><br>
+   	 队牌设计包含海棠花、56式枪支、国旗和数字“28”三个主体元素，整体采用黄色和红色，整体对称凸显国	旗护卫队的庄重感。以海棠花作为学校的代表元素，以枪支和国旗展现护卫国旗的主题，数字“28”的设计	中融入了冬训时一起看过的的雪和烟花，展现训练中的温情。
+</div>
+
+<div class="section">
+    <h2>留言区</h2>
+    <div id="comments"></div>
+</div>
+
+<div class="section">
+    <h3>提交修改意见</h3>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="请输入真实姓名">
+        <textarea id="message" placeholder="请输入修改意见"></textarea>
+    </div>
+    <button onclick="submitComment()">提交</button>
+</div>
+
+<div class="section" style="text-align:center;">
+    <button class="back-btn" onclick="goBack1()">← 返回</button>
+</div>
+
+<div id="voteResult"></div>
+<div class="vote-section">
+    <button class="vote-btn" onclick="vote(designName)">
+        投票支持
+    </button>
+</div>
+
+<script>
+window.designName = "board3";
+window.parentPage1 = "board.html";
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

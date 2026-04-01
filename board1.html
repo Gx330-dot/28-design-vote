@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>队牌设计1</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<div class="main-container">
+<h1>队牌设计 1</h1>
+
+<div class="section image-card">
+    <img src="design11.jpg" style="width:300px;border-radius:10px;">
+</div>
+
+<div class="section description-card">
+    <strong>设计说明：</strong><br>
+    	①校徽：体现天大特色<br>
+	②五星：表达对国旗的热爱与守护<br>
+	③28:   体现国护的传承和第28届队员的特色<br>
+	④旗手护旗手剪影和数字28上的礼服以及56枪支：体现国护队员形象<br>
+	⑤红星与麦穗：红星象征革命精神与爱国初心。麦穗代表丰收与希望，寓意队伍在传承中稳步发展，硕果累累<br>
+</div>
+
+<div class="section">
+    <h2>留言区</h2>
+    <div id="comments"></div>
+</div>
+
+<div class="section">
+    <h3>提交修改意见</h3>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="请输入真实姓名">
+        <textarea id="message" placeholder="请输入修改意见"></textarea>
+    </div>
+    <button onclick="submitComment()">提交</button>
+</div>
+
+<div class="section" style="text-align:center;">
+    <button class="back-btn" onclick="goBack1()">← 返回</button>
+</div>
+
+<div id="voteResult"></div>
+<div class="vote-section">
+    <button class="vote-btn" onclick="vote(designName)">
+        投票支持
+    </button>
+</div>
+
+<script>
+window.designName = "board1";
+window.parentPage1 = "board.html";
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>

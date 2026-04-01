@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>队衫设计3</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<div class="main-container">
+<h1>队衫设计 3</h1>
+
+<div class="section image-card">
+    <img src="design3.jpg" style="width:300px;border-radius:10px;">
+</div>
+
+<div class="section description-card">
+    <strong>设计说明：</strong><br>
+    	队衫正面的数字“28”中融入雪和烟花元素，展现训练中的温情记忆。<br>
+	队衫反面的设计以东门广场旁边的标志性建筑为背景，此为大训练的必经之路，其上加入队标和队印，体现	国旗护卫队的凝聚力，方形和圆形的融合也具有美感，图案两侧的“爱校护旗，奉献真心”体现了国护队员	的初心。<br>
+</div>
+
+<div class="section">
+    <h2>留言区</h2>
+    <div id="comments"></div>
+</div>
+
+<div class="section">
+    <h3>提交修改意见</h3>
+    <div class="input-group">
+        <input type="text" id="name" placeholder="请输入真实姓名">
+        <textarea id="message" placeholder="请输入修改意见"></textarea>
+    </div>
+    <button onclick="submitComment()">提交</button>
+</div>
+
+<div class="section" style="text-align:center;">
+    <button class="back-btn" onclick="goBack()">← 返回</button>
+</div>
+
+<div id="voteResult"></div>
+<div class="vote-section">
+    <button class="vote-btn" onclick="vote(designName)">
+        投票支持
+    </button>
+</div>
+
+<script>
+window.designName = "shirt3";
+window.parentPage = "shirt.html";
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
