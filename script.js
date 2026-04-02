@@ -11,15 +11,29 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-async function deleteComment(id) {
+// 修复后的删除评论函数
+window.deleteComment = async function deleteComment(id) {
     if (!confirm("确定删除这条留言吗？")) return;
 
-    await supabaseClient
-        .from('comments')
-        .delete()
-        .eq('id', id);
+    try {
+        const { error } = await supabaseClient
+            .from('comments')
+            .delete()
+            .eq('id', id)
+            .eq('user_id', userId); // 加上自己的ID，更安全
 
-    loadComments();
+        if (error) {
+            console.error("删除失败：", error);
+            alert("删除失败：" + error.message);
+            return;
+        }
+
+        alert("删除成功！");
+        loadComments();
+    } catch (err) {
+        console.error(err);
+        alert("删除请求出错");
+    }
 }
 
 const designName = window.designName;
@@ -40,12 +54,12 @@ if (data) {
         let deleteButton = "";
 
         if (c.user_id === userId) {
-            deleteButton = `
-                <button onclick="deleteComment(${c.id})"
-                style="float:right;background: #E6E6FA;">
-                删除
-                </button>
-            `;
+		deleteButton = `
+    		<button onclick="deleteComment('${c.id}')"
+    		style="float:right;background: #E6E6FA;">
+    		删除
+    		</button>
+	`;
         }
 
         commentDiv.innerHTML += `
