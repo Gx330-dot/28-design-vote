@@ -22,16 +22,16 @@ const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey, {
 
 // 修复后的删除评论函数
 // 终极跨设备删除函数 —— 任何设备都能删自己的评论
-window.deleteComment = async function deleteComment(id) {
+window.deleteComment = async function deleteComment(id, userId_param) {
     if (!confirm("确定删除这条留言吗？")) return;
 
     try {
-        // 关键：删除时必须同时匹配 id 和 user_id
+        // 使用传入的 userId_param 参数
         const { error } = await supabaseClient
             .from('comments')
             .delete()
             .eq('id', id)
-            .eq('user_id', userId);
+            .eq('user_id', userId_param);  // 改为使用参数
 
         if (error) {
             alert("删除失败：" + error.message);
