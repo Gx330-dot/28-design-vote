@@ -12,29 +12,29 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // 修复后的删除评论函数
-window.deleteComment = async function deleteComment(id) {
+// 终极跨设备删除函数 —— 任何设备都能删自己的评论
+window.deleteComment = async function deleteComment(commentId, commentUserId) {
     if (!confirm("确定删除这条留言吗？")) return;
 
     try {
         const { error } = await supabaseClient
             .from('comments')
             .delete()
-            .eq('id', id)
-            .eq('user_id', userId); // 加上自己的ID，更安全
+            .eq('id', commentId)
+            .eq('user_id', commentUserId); // 关键：用评论自带的 user_id
 
         if (error) {
-            console.error("删除失败：", error);
             alert("删除失败：" + error.message);
+            console.error(error);
             return;
         }
 
         alert("删除成功！");
         loadComments();
-    } catch (err) {
-        console.error(err);
-        alert("删除请求出错");
+    } catch (e) {
+        alert("出错：" + e.message);
     }
-}
+};
 
 const designName = window.designName;
 
@@ -53,14 +53,15 @@ if (data) {
 
         let deleteButton = "";
 
-        if (c.user_id === userId) {
-		deleteButton = `
-    		<button onclick="deleteComment('${c.id}')"
-    		style="float:right;background: #E6E6FA;">
-    		删除
-    		</button>
-	`;
-        }
+	if (c.user_id === userId) {
+    	// 把评论的 user_id 一起传给删除函数
+    	deleteButton = `
+        	<button onclick="deleteComment('${c.id}', '${c.user_id}')"
+        	style="float:right;background: #E6E6FA;">
+        	删除
+        	</button>
+    	`;
+}
 
         commentDiv.innerHTML += `
             <div class="comment-card">
