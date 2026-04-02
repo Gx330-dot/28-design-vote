@@ -1,9 +1,16 @@
 // 生成或获取当前用户ID
-let userId = localStorage.getItem("user_id");
+let userId = localStorage.getItem("user_name");
 
 if (!userId) {
-    userId = crypto.randomUUID();
-    localStorage.setItem("user_id", userId);
+    userId = prompt("请输入您的姓名（用于投票记录）");
+
+    if (!userId || userId.trim() === "") {
+        alert("必须填写姓名才能投票");
+        location.reload();
+    }
+
+    userId = userId.trim();
+    localStorage.setItem("user_name", userId);
 }
 
 const supabaseUrl = 'https://vhfzgnahhaaqvfsjrhux.supabase.co';
@@ -117,63 +124,56 @@ function goBack1() {
 }
 
 async function vote(designName) {
-    // 确定当前的类别（shirt 或 board）
+    // 确定当前类别
     const category = designName.includes('shirt') ? 'shirt' : 'board';
     
-    // 查询当前用户在此类别投了多少票
+    // 查询当前用户所有投票
     const { data: userVotes } = await supabaseClient
         .from('votes')
         .select('*')
         .eq('user_id', userId);
     
-    // 统计用户在此类别中的投票数
-    const categoryVotes = userVotes.filter(v => {
-        const voteCategory = v.design.includes('shirt') ? 'shirt' : 'board';
-        return voteCategory === category;
-    }).length;
+    if (!userVotes) return;
+
+    // 统计当前类别投票数（改为用数据库字段）
+    const categoryVotes = userVotes.filter(v => v.category === category).length;
     
     if (categoryVotes >= 2) {
-        if (category === 'shirt') {
-            alert("您已在队衫设计中投了 2 票，不能再投了");
-        } else {
-            alert("您已在队牌设计中投了 2 票，不能再投了");
-        }
+        alert(`您已在该类别投了 2 票，不能再投了`);
         return;
     }
     
-    // 检查是否已经给这个具体设计投过票
+    // 检查是否已投该设计
     const alreadyVoted = userVotes.some(v => v.design === designName);
     if (alreadyVoted) {
         alert("您已经给这个设计投过票了");
         return;
     }
     
-    // 插入投票
+    // 插入投票（必须加 category）
     const { error } = await supabaseClient
         .from('votes')
         .insert([
-            { design: designName, user_id: userId }
+            { 
+                design: designName,
+                user_id: userId,
+                category: category
+            }
         ]);
     
     if (error) {
-        alert("投票失败：" + error.message);
+        // 数据库兜底判断
+        if (error.message.includes("unique")) {
+            alert("您已经给这个设计投过票了");
+        } else if (error.message.includes("Vote limit")) {
+            alert("该类别最多只能投 2 票");
+        } else {
+            alert("投票失败：" + error.message);
+        }
         return;
     }
     
     alert("投票成功！");
-    
-    // 更新当前页面的按钮状态
-    const btn = document.querySelector(".vote-btn");
-    if (btn) {
-        const remainingVotes = 2 - (categoryVotes + 1);
-        if (remainingVotes <= 0) {
-            btn.disabled = true;
-            btn.innerText = "已投满";
-        } else {
-            btn.disabled = false;
-            btn.innerText = `投票支持 (还可投 ${remainingVotes} 票)`;
-        }
-    }
     
     loadVotes();
 }
@@ -189,10 +189,7 @@ async function loadVotes() {
     const category = designName.includes('shirt') ? 'shirt' : 'board';
     
     // 获取当前类别的所有设计和投票统计
-    const categoryVotes = data.filter(v => {
-        const voteCategory = v.design.includes('shirt') ? 'shirt' : 'board';
-        return voteCategory === category;
-    });
+    const categoryVotes = data.filter(v => v.category === category);
     
     const totalCategoryVotes = categoryVotes.length;
     const currentVotes = categoryVotes.filter(v => v.design === designName).length;
@@ -218,10 +215,7 @@ async function loadVotes() {
         .select('*')
         .eq('user_id', userId);
     
-    const userCategoryVotes = userVotes.filter(v => {
-        const voteCategory = v.design.includes('shirt') ? 'shirt' : 'board';
-        return voteCategory === category;
-    });
+    const userCategoryVotes = userVotes.filter(v => v.category === category);
     
     const remainingVotes = 2 - userCategoryVotes.length;
     const btn = document.querySelector(".vote-btn");
