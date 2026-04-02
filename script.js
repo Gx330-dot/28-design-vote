@@ -130,36 +130,40 @@ async function loadVotes() {
 
     if (!data) return;
 
-    // 统计总票数
     const totalVotes = data.length;
-
-    // 统计当前设计票数
     const currentVotes = data.filter(v => v.design === designName).length;
 
-    const voteDiv = document.getElementById("voteResult");
-
     let percentage = 0;
-
     if (totalVotes > 0) {
         percentage = ((currentVotes / totalVotes) * 100).toFixed(1);
     }
 
+    const voteDiv = document.getElementById("voteResult");
+
     voteDiv.innerHTML = `
         <div class="vote-box">
-            票数：${currentVotes} 票<br>
-            占比：${percentage}%
+            <div>票数：${currentVotes} 票 (${percentage}%)</div>
+            <div class="vote-bar">
+                <div class="vote-fill" style="width:${percentage}%"></div>
+            </div>
         </div>
     `;
+
+	const { data: userVotes } = await supabaseClient
+    	.from('votes')
+    	.select('*')
+    	.eq('user_id', userId);
+
+	if (userVotes.length >= 2) {
+    	const btn = document.querySelector(".vote-btn");
+    	if (btn) {
+        btn.disabled = true;
+        btn.innerText = "已投票";
+    }
+}
 }
 
-voteDiv.innerHTML = `
-    <div class="vote-box">
-        <div>票数：${currentVotes} 票 (${percentage}%)</div>
-        <div class="vote-bar">
-            <div class="vote-fill" style="width:${percentage}%"></div>
-        </div>
-    </div>
-`;
-
-loadComments();
-loadVotes();
+window.addEventListener("DOMContentLoaded", () => {
+    loadComments();
+    loadVotes();
+});
