@@ -9,7 +9,16 @@ if (!userId) {
 const supabaseUrl = 'https://vhfzgnahhaaqvfsjrhux.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZoZnpnbmFoaGFhcXZmc2pyaHV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ5NjQ0ODMsImV4cCI6MjA5MDU0MDQ4M30.1xH6IwmH4cB8xyV68DKVNhlgnq6zcFZdoBgXMcqaeUI';
 
-const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+//const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey, {
+  global: {
+    headers: {
+      'Accept': 'application/json',
+      // 增加这一行以确保跨域请求最顺畅
+      'Access-Control-Allow-Origin': window.location.origin
+    }
+  }
+});
 
 // 修复后的删除评论函数
 // 终极跨设备删除函数 —— 任何设备都能删自己的评论
